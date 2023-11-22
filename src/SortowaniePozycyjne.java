@@ -7,7 +7,7 @@ public class SortowaniePozycyjne {
                 maxLength = Math.max(maxLength, value.length()); //znalezienie dlugosci najdluzszej wartosci
         }
 
-        for (int i = 1; i < tab.length; i++) {
+        for (int i = 0; i < tab.length; i++) {
                 while (tab[i].length() < maxLength) { //wyrownanie dlugosci
                     tab[i] = "0" + tab[i];
                 }
@@ -16,14 +16,14 @@ public class SortowaniePozycyjne {
 
     public static void sortujPozycyjnie(String[] tab) {
         wyrownajDlugosc(tab); // wyrownujemy dlugosc
-        int maxLength = tab[1].length(); // dlugosc wszystkich wartosci
+        int maxLength = tab[0].length(); // dlugosc wszystkich wartosci
 
 
         for (int cyfra = maxLength - 1; cyfra >= 0; cyfra--) { //sortowanie cyfrowe
             sortowanieCyfrowe(tab, cyfra);
         }
 
-        for (int i = 1; i < tab.length; i++) { //usuniecie zer aby byl czytelniejszy wynik
+        for (int i = 0; i < tab.length; i++) { //usuniecie zer aby byl czytelniejszy wynik
                 tab[i] = usunZera(tab[i]);
         }
     }
@@ -33,7 +33,7 @@ public class SortowaniePozycyjne {
         String[] wynik = new String[n]; //  tablica wynikowa
         int[] zliczanie = new int[10]; //tablica do zliczania cyfr
 
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             int num = tab[i].charAt(cyfra) - '0'; //konwersja
             zliczanie[num]++;
         }
@@ -42,14 +42,14 @@ public class SortowaniePozycyjne {
             zliczanie[i] += zliczanie[i - 1];
         }
 
-        for (int i = n - 1; i > 0; i--) {
+        for (int i = n - 1; i >= 0; i--) {
             int num = tab[i].charAt(cyfra) - '0';
-            wynik[zliczanie[num]] = tab[i];
+            wynik[zliczanie[num]-1] = tab[i];
             zliczanie[num]--;
         }
 
 
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             tab[i] = wynik[i]; //przepisanie do tablicy poczatkowej
         }
     }
